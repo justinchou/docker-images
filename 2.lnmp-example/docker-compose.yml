@@ -1,0 +1,44 @@
+version: '3.3'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8899:80"
+    volumes:
+      - ./nginx/logs:/var/logs/nginx/:rw
+    networks:
+      - frontend
+
+  swoole:
+    build: ./swoole
+    ports:
+      - "9501"
+    tty: true
+    networks:
+      - frontend
+      - backend
+
+  cgi:
+    image: bccq/php-build
+    ports:
+      - "9000"
+    volumes:
+      - ./cgi/code:/var/www
+    networks:
+      - frontend
+      - backend
+
+  nodejs:
+    build: ./nodejs
+    ports:
+      - "3000"
+    tty: true
+    networks:
+      - frontend
+      - backend
+
+
+networks:
+  frontend:
+  backend:

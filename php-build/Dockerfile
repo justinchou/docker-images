@@ -15,7 +15,7 @@ RUN groupadd www && useradd -g www www
 RUN yum remove -y cmake
 
 RUN tar zxvf cmake-3.10.2-Linux-x86_64.tar.gz
-ENV PATH "$PATH:/data/cmake-3.10.2-Linux-x86_64/bin"
+ENV PATH "$PATH:/data/cmake-3.10.2-Linux-x86_64/bin:/usr/local/php7/bin:/usr/local/php7/sbin"
 
 # Update libzip
 RUN tar -zxvf libzip-1.5.2.tar.gz
@@ -48,7 +48,6 @@ RUN cd php-7.3.10 && ./configure --prefix=/usr/local/php7/ \
   --with-xsl --enable-zip --enable-mysqlnd \
   --with-mysqli --without-pear --enable-pcntl --enable-bcmath \
   && make && make install
-
 
 RUN cp php-7.3.10/php.ini-production /usr/local/php7/etc/php.ini
 RUN cp /usr/local/php7/etc/php-fpm.conf.default /usr/local/php7/etc/php-fpm.conf
