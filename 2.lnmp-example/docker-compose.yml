@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 
 services:
   nginx:
@@ -14,17 +14,15 @@ services:
     build: ./swoole
     ports:
       - "9501"
-    tty: true
     networks:
       - frontend
       - backend
 
   cgi:
-    image: bccq/php-build
+    build: ./cgi
     ports:
       - "9000"
-    volumes:
-      - ./cgi/code:/var/www
+    # tty: true
     networks:
       - frontend
       - backend
@@ -33,7 +31,6 @@ services:
     build: ./nodejs
     ports:
       - "3000"
-    tty: true
     networks:
       - frontend
       - backend
@@ -46,7 +43,6 @@ services:
   #     - MYSQL_ROOT_PASSWORD=123456
   #   networks:
   #     - backend
-
   # redis:
   #   image: "redis"
   #   ports:
