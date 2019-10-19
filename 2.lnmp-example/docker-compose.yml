@@ -35,20 +35,26 @@ services:
       - frontend
       - backend
 
-  # mysql:
-  #   image: "mysql"
-  #   ports:
-  #     - 3306
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=123456
-  #   networks:
-  #     - backend
-  # redis:
-  #   image: "redis"
-  #   ports:
-  #     - 6379
-  #   networks:
-  #     - backend
+  mysql:
+    image: "mysql:5.7"
+    ports:
+      - 3306
+    volumes:
+      - ./mysql:/data/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/logs:/logs
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    networks:
+      - backend
+
+  redis:
+    image: "redis"
+    ports:
+      - 6379
+    networks:
+      - backend
 
 networks:
   frontend:
