@@ -49,14 +49,25 @@ RUN cd php-7.3.10 && ./configure --prefix=/usr/local/php7/ \
   --with-mysqli --without-pear --enable-pcntl --enable-bcmath \
   && make && make install
 
+COPY ./plugins/redis-4.0.0.tgz /data
 RUN tar xf redis-4.0.0.tgz
 RUN cd redis-4.0.0 && phpize && ./configure --with-php-config=/usr/local/php7/bin/php-config && make && make install
 
+COPY ./plugins/swoole-4.4.8.tgz /data
 RUN tar xf swoole-4.4.8.tgz
 RUN cd swoole-4.4.8 && phpize && ./configure --with-php-config=/usr/local/php7/bin/php-config && make && make install
 
+COPY ./plugins/mongodb-1.6.0.tgz /data
 RUN tar xf mongodb-1.6.0.tgz
 RUN cd mongodb-1.6.0 && phpize && ./configure --with-php-config=/usr/local/php7/bin/php-config && make && make install
+
+RUN rm -rf \
+  cmake-3.10.2-Linux-x86_64.tar.gz \
+  libzip-1.5.2.tar.gz libzip-1.5.2 \
+  php-7.3.10.tar.gz php-7.3.10 \
+  redis-4.0.0.tgz redis-4.0.0 \
+  swoole-4.4.8.tgz swoole-4.4.8 \
+  mongodb-1.6.0.tgz mongodb-1.6.0
 
 COPY ./plugins/php.ini /usr/local/php7/etc/php.ini
 RUN cp /usr/local/php7/etc/php-fpm.conf.default /usr/local/php7/etc/php-fpm.conf
