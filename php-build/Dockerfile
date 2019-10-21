@@ -69,7 +69,9 @@ RUN rm -rf \
   swoole-4.4.8.tgz swoole-4.4.8 \
   mongodb-1.6.0.tgz mongodb-1.6.0
 
+COPY ./plugins/conf.d /usr/local/php7/etc/conf.d
 COPY ./plugins/php.ini /usr/local/php7/etc/php.ini
+
 RUN cp /usr/local/php7/etc/php-fpm.conf.default /usr/local/php7/etc/php-fpm.conf
 RUN cp /usr/local/php7/etc/php-fpm.d/www.conf.default /usr/local/php7/etc/php-fpm.d/www.conf
 
