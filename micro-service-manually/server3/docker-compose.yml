@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  consul_server:
+    image: consul
+    environment:
+      CONSUL_CLIENT_INTERFACE: eth0
+      CONSUL_BIND_INTERFACE: eth0
+    volumes:
+      - ./data:/consul/data
+    command: consul agent -server -bootstrap-expect=3 -client=0.0.0.0 -ui -data-dir=/consul/data -recursor=8.8.8.8 --bind=192.168.254.9 -join 192.168.254.7
+    network_mode: host
