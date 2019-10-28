@@ -1,0 +1,1 @@
+{ "service": { "name": "api", "tags": ["nodejs"], "port": 3000 } }

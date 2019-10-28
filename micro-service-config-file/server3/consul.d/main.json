@@ -1,0 +1,12 @@
+{
+  "node_name": "server3",
+  "server": true,
+  "bootstrap_expect": 1,
+  "client_addr": "0.0.0.0",
+  "bind_addr": "192.168.254.9",
+  "retry_join": ["192.168.254.7", "192.168.254.8"],
+  "retry_interval": "30s",
+  "ui": true,
+  "data_dir": "/consul/data",
+  "recursors": ["8.8.8.8", "114.114.114.114"]
+}

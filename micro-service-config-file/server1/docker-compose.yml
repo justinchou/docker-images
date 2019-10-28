@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  consul_server:
+    image: consul
+    environment:
+      CONSUL_CLIENT_INTERFACE: eth0
+      CONSUL_BIND_INTERFACE: eth0
+    volumes:
+      - ./data:/consul/data
+      - ./consul.d:/consul/config
+    command: consul agent -enable-local-script-checks -config-dir=/consul/config
+    network_mode: host
